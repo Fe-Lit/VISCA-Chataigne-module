@@ -1,7 +1,7 @@
 {
   "name":"VISCA PTZ",
-  "type":"Serial",
-  "path":"Custom",
+  "type":"UDP",
+  "path":"Protocol",
   
   "version":"0.1.0",
   "description":"Module to Controll PTZ Cameras via VISCA Protocoll",
@@ -14,18 +14,25 @@
   
   "defaults":
   {	
-    "autoAdd":false,
-    "oscInput":
-    {
-      "localPort":9001
-    }
+    "autoAdd":false
   },
 
   "parameters":
   {
-    "Module param":
+    "Port":
     {
-      "type":"Integer"
+      "type":"Integer",
+      "default":52381
+    },
+        "Device ID":
+    {
+      "type":"Integer",
+      "min":0,
+      "max":7
+    },
+        "IP":
+    {
+      "type":"String"
     }
   },
 
@@ -38,9 +45,25 @@
 
   "values":
   {
-    "Module value":
+    "Payload Type":
     {
-      "type":"Float"
+      "type":"Enum"
+    },
+        "CAM_Power":
+    {
+      "type":"Boolean"
+    },
+    "CAM_Zoom"
+    {
+      "type":"Integer"
+    },
+    "Pan Position"
+    {
+      "type":"Integer"
+    },
+        "Tilt Position"
+    {
+      "type":"Integer"
     }
   },
 
@@ -59,6 +82,25 @@
           "min":0,
           "max":100,
           "default":0
+        }
+      }
+    },
+        "Set Zoom":
+    {
+      "menu":"Zoom",  
+      "callback":"Zoom",
+      "parameters":
+      {
+        "Speed":
+        {
+          "type":"Integer",
+          "min":0,
+          "max":100,
+          "default":50
+        },
+        "Direction":
+        {
+          type:"Boolean"
         }
       }
     }
