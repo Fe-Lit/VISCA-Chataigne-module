@@ -1,5 +1,5 @@
 function init() {
-  script.log("Custom module init");
+  script.log("VISCA module init");
 }
 
 
