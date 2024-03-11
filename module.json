@@ -100,7 +100,7 @@
         },
         "Direction":
         {
-          type:"Boolean"
+          "type":"Integer"
         }
       }
     }
