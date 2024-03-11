@@ -1,12 +1,11 @@
 {
-  "name":"My custom module",
-  "type":"OSC",
+  "name":"VISCA PTZ",
+  "type":"Serial",
   "path":"Custom",
   
-  "version":"1.0.0",
-  "description":"My module description",
-  "url":"https://github.com/tommag/Sample-Chataigne-module",
-  "downloadURL":"https://github.com/tommag/Sample-Chataigne-module/archive/master.zip",
+  "version":"0.1.0",
+  "description":"Module to Controll PTZ Cameras via VISCA Protocoll",
+  "url":"https://github.com/Fe-Lit/VISCA-Chataigne-module",
 
   "hasInput":true,
   "hasOutput":true, 
