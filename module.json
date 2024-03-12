@@ -1,106 +1,108 @@
 {
-  "name":"VISCA PTZ",
-  "type":"UDP",
-  "path":"Protocol",
-  
-  "version":"0.1.0",
-  "description":"Module to Controll PTZ Cameras via VISCA Protocoll",
-  "url":"https://github.com/Fe-Lit/VISCA-Chataigne-module",
-
-  "hasInput":true,
-  "hasOutput":true, 
-
-  "hideDefaultCommands":false,
-  
-  "defaults":
-  {	
-    "autoAdd":false
-  },
-
-  "parameters":
-  {
-    "Port":
-    {
-      "type":"Integer",
-      "default":52381
-    },
-        "Device ID":
-    {
-      "type":"Integer",
-      "min":0,
-      "max":7
-    },
-        "IP":
-    {
-      "type":"String"
-    }
-  },
-
-  "hideDefaultParameters": [ "autoAdd", "oscInput/localPort"],
-
-  "scripts": 
-  [
-    "moduleScript.js"
+  "name": "VISCA PTZ",
+  "type": "UDP",
+  "path": "Protocol",
+  "version": "0.1.0",
+  "description": "Module to Controll PTZ Cameras via VISCA Protocoll",
+  "url": "https://github.com/Fe-Lit/VISCA-Chataigne-module",
+  "hasInput": true,
+  "hasOutput": true,
+  "hideDefaultCommands": false,
+  "hideDefaultParameters": [
+    "autoAdd"
   ],
-
-  "values":
-  {
-    "Payload Type":
-    {
-      "type":"Enum"
-    },
-        "CAM_Power":
-    {
-      "type":"Boolean"
-    },
-    "CAM_Zoom"
-    {
-      "type":"Integer"
-    },
-    "Pan Position"
-    {
-      "type":"Integer"
-    },
-        "Tilt Position"
-    {
-      "type":"Integer"
+  "defaults": {
+    "autoAdd": false,
+    "Protocol": "Raw",
+    "output": {
+      "remotePort": 9990,
+      "local": false
     }
   },
-
-  "commands":
-  {
-    
-    "Custom command":
-    {
-      "menu":"",  
-      "callback":"customCmd",
-      "parameters":
-      {
-        "Value":
-        {
-          "type":"Integer",
-          "min":0,
-          "max":100,
-          "default":0
+  "parameters": {
+    "Port": {
+      "type": "Integer",
+      "default": 52381
+    },
+    "Device ID": {
+      "type": "Integer",
+      "min": 0,
+      "max": 7
+    },
+    "IP": {
+      "type": "String"
+    }
+  },
+  "scripts": [
+    "VISCA.js"
+  ],
+  "values": {
+    "Payload Type": {
+      "type": "Enum"
+    },
+    "CAM_Power": {
+      "type": "Boolean"
+    },
+    "Pan": {
+      "type": "Float",
+      "description": "Pan Position in Deg",
+      "min": -180,
+      "max": 180
+    },
+    "Tilt": {
+      "type": "Float",
+      "description": "Tilt Position in Deg",
+      "min": -180,
+      "max": 180
+    },
+    "Zoom": {
+      "type": "Integer",
+      "description": "Zoom",
+      "min": 0,
+      "max": 16777215
+    },
+    "Focus": {
+      "type": "Integer",
+      "description": "Camera Focus",
+      "min": 0,
+      "max": 16777215
+    }
+  },
+  "commands": {
+    "Custom command": {
+      "menu": "",
+      "callback": "customCmd",
+      "parameters": {
+        "Value": {
+          "type": "Integer",
+          "min": 0,
+          "max": 100,
+          "default": 0
         }
       }
     },
-        "Set Zoom":
-    {
-      "menu":"Zoom",  
-      "callback":"Zoom",
-      "parameters":
-      {
-        "Speed":
-        {
-          "type":"Integer",
-          "min":0,
-          "max":100,
-          "default":50
+    "Set Zoom": {
+      "menu": "Zoom",
+      "callback": "Zoom",
+      "parameters": {
+        "Speed": {
+          "type": "Integer",
+          "min": 0,
+          "max": 100,
+          "default": 50
         },
-        "Direction":
-        {
-          "type":"Integer"
+        "Direction": {
+          "type": "Integer"
+        }
+      }
+    },
+    "Send custom message": {
+      "menu": "",
+      "callback": "sendCustomMessage",
+      "parameters": {
+        "Message": {
+          "type": "String",
+          "default": "message"
         }
       }
     }
