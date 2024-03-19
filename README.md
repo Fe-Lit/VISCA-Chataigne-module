@@ -1,5 +1,6 @@
 # VISCA-Chataigne-module
 This Repo is aimed at creating a Chataigne Module to controll PTZ Cameras via Sony VISCA protocoll.
+This module is not yet functional, it is a work in progress.
 
 ## Work done so far:
 - Basic module.json with most used Values
