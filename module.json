@@ -3,34 +3,33 @@
   "type": "UDP",
   "path": "Protocol",
   "version": "0.1.0",
-  "description": "Module to Controll PTZ Cameras via VISCA Protocoll",
+  "description": "Module to Controll PTZ Cameras via VISCA Protocol",
   "url": "https://github.com/Fe-Lit/VISCA-Chataigne-module",
   "hasInput": true,
   "hasOutput": true,
   "hideDefaultCommands": false,
   "hideDefaultParameters": [
-    "autoAdd"
+    "autoAdd",
+    "firstValueIsTheName",
+    "messageStructure",
+    "protocol"
   ],
   "defaults": {
     "autoAdd": false,
     "Protocol": "Raw",
     "output": {
-      "remotePort": 9990,
+      "remotePort": 52381,
       "local": false
+    },
+    "input": {
+      "localPort": 52380
     }
   },
   "parameters": {
-    "Port": {
+    "CAM ID": {
       "type": "Integer",
-      "default": 52381
-    },
-    "Device ID": {
-      "type": "Integer",
-      "min": 0,
+      "min": 1,
       "max": 7
-    },
-    "IP": {
-      "type": "String"
     }
   },
   "scripts": [
@@ -38,61 +37,102 @@
   ],
   "values": {
     "Payload Type": {
-      "type": "Enum"
+      "type": "Enum",
+      "options": { "VISCA command":"command", "VISCA inquiry":"inquiry", "VISCA reply":"reply", "VISCA device setting":"devicesetting"}
     },
-    "CAM_Power": {
-      "type": "Boolean"
+    "Camera Power": {
+      "type": "Boolean",
+       "description": "True means Camera On"
     },
     "Pan": {
       "type": "Float",
       "description": "Pan Position in Deg",
       "min": -180,
-      "max": 180
+      "max": 180,
+      "ui":"slider"
     },
     "Tilt": {
       "type": "Float",
       "description": "Tilt Position in Deg",
       "min": -180,
-      "max": 180
+      "max": 180,
+      "ui":"slider"
     },
     "Zoom": {
-      "type": "Integer",
+      "type": "Float",
       "description": "Zoom",
       "min": 0,
-      "max": 16777215
+      "max": 100,
+      "ui":"slider"
     },
     "Focus": {
-      "type": "Integer",
+      "type": "Float",
       "description": "Camera Focus",
       "min": 0,
-      "max": 16777215
+      "max": 100,
+      "ui":"slider"
     }
   },
   "commands": {
-    "Custom command": {
-      "menu": "",
-      "callback": "customCmd",
-      "parameters": {
-        "Value": {
-          "type": "Integer",
-          "min": 0,
-          "max": 100,
-          "default": 0
-        }
-      }
-    },
     "Set Zoom": {
-      "menu": "Zoom",
-      "callback": "Zoom",
+      "menu": "Lens",
+      "callback": "set_zoom",
       "parameters": {
         "Speed": {
-          "type": "Integer",
+          "type": "Float",
           "min": 0,
           "max": 100,
           "default": 50
         },
         "Direction": {
           "type": "Integer"
+        }
+      }
+    },
+        "Set Focus": {
+      "menu": "Lens",
+      "callback": "set_focus",
+      "parameters": {
+        "Speed": {
+          "type": "Float",
+          "min": 0,
+          "max": 100,
+          "default": 50
+        }
+      }
+    },
+        "Save Preset": {
+      "menu": "Presets",
+      "callback": "save_preset",
+      "parameters": {
+        "Number": {
+          "type": "Integer",
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "Recall Preset": {
+      "menu": "Presets",
+      "callback": "call_preset",
+      "parameters": {
+        "Number": {
+          "type": "Integer",
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "Move Camera": {
+      "menu": "Movement",
+      "callback": "move_cam",
+      "parameters": {
+        "Direction": {
+           "type": "Enum",
+      "options": { "Up":"move_up", "Down":"move_down", "Left":"move_left", "Right":"move_right"}
+        },
+        "Speed": {
+          "type": "Float"
         }
       }
     },
