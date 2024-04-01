@@ -71,7 +71,18 @@
       "min": 0,
       "max": 100,
       "ui":"slider"
-    }
+    },
+	   "WhiteBalance": {
+      "type": "Enum",
+      "options": { "Auto":"wb_auto", "Indoor":"wb_indoor", "Outdoor":"wb_outdoor", "One Push WB":"wb_onepush", "Manual":"wb_manual"}
+    },
+	"ManualWB": { 
+	"type":"Integer", 
+	"dependency": { "source":"WhiteBalance", "value":"wb_manual", "check":"equals", "action":"show" },
+    "min": 1000,
+    "max": 10000,
+    "default": 6500	
+	} 
   },
   "commands": {
     "Set Zoom": {
@@ -126,6 +137,7 @@
     "Move Camera": {
       "menu": "Movement",
       "callback": "move_cam",
+	  "description": "Move the Camera in the Specified Direction",
       "parameters": {
         "Direction": {
            "type": "Enum",
@@ -138,11 +150,12 @@
     },
     "Send custom message": {
       "menu": "",
-      "callback": "sendCustomMessage",
+      "callback": "customCmd",
+	  "description": "Send your own commanand",
       "parameters": {
         "Message": {
           "type": "String",
-          "default": "message"
+          "default": "FFFFFF"
         }
       }
     }
