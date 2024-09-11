@@ -148,10 +148,11 @@
         }
       }
     },
+	
     "Send custom message": {
       "menu": "",
       "callback": "customCmd",
-	  "description": "Send your own commanand",
+	  "description": "Send your own command",
       "parameters": {
         "Message": {
           "type": "String",
